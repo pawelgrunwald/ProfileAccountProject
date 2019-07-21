@@ -1,0 +1,20 @@
+.card-n {
+    /* background: green; */
+    height: 15%;
+}
+.post-menu-more {
+    /* background: red; */
+    width: 10%;
+    cursor: pointer;
+}
+.post-menu {
+    /* background: green; */
+    display: none;
+    width: 50%;
+}
+.post-menu ul li {
+    display: inline;
+}
+.post-menu ul li a {
+    color: brown;
+}
