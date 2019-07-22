@@ -35,7 +35,7 @@
                                 <a class="nav-link" href="{{  URL::to('/home') }}">Strona główna</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{  URL::to('profile/'.Auth::user()->name.'-'.Auth::user()->surname.'/') }}">Profil</a>
+                                <a class="nav-link" href="{{  URL::to('profile/') }}">Profil</a>
                             </li>
                             @endif
                               <li class="nav-item dropdown position-text">
@@ -49,9 +49,6 @@
 
                                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                       <ul class="dropdown-nav">
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="{{  URL::to('profile/'.Auth::user()->name.'-'.Auth::user()->surname.'/') }}">Moje dane</a>
-                                        </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="{{  URL::to('/profile/settings') }}">Ustawienia</a>
                                         </li>

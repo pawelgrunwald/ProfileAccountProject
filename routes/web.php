@@ -23,9 +23,11 @@ Route::get('/home', 'PostController@index');
 
 Route::post('/', 'PostController@storePost');
 
-Route::get('/profile/{userName}-{userSurname}', 'UserController@userTable');
+Route::get('/profile', 'UserController@userTable');
 
 Route::get('/post/{post_id}/setActive', 'PostController@setActive');
+
+Route::get('/post/{post_id}/delete', 'PostController@deletePost');
 
 Auth::routes();
 

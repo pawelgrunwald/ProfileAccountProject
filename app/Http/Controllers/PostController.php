@@ -37,8 +37,13 @@ class PostController extends Controller
         $post->content = $request->input('content');
         $post->shared = $request->get('sharing');
         $post->save();
-
-        return redirect()->action('PostController@index');
+        
+        if ($post->shared == 0) {
+            $postShared = 'nieaktywny';
+        } else {
+            $postShared = 'aktywny';
+        }
+        return redirect()->action('PostController@index')->with('status', 'Dodano nowy Post jako '.$postShared);
     }
 
 
@@ -51,6 +56,17 @@ class PostController extends Controller
             return redirect('/home');
         }
         $postRepository->update($post_id, ['shared' => 1]);
-        return redirect('/profile/'.Auth::user()->name.'-'.Auth::user()->surname);
+        return redirect('/profile')->with('status', 'Ustawiono Post jako aktywny');
+    }
+
+    public function deletePost(PostRepository $postRepository, $post_id) {
+        if (Auth::user()->type == 1) {
+            return redirect()->route('start');
+        } else if ($postRepository->checkUserOfPost($post_id)->user_id != Auth::user()->id ) {
+            return redirect('/home');
+        }
+        $postRepository->delete($post_id);
+
+        return redirect('/home')->with('status', 'Post został usunięty');
     }
 }

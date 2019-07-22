@@ -3,6 +3,15 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
+        <div class="col-md-6">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+        </div>
+    </div>
+    <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="header-profile-section">
 
@@ -11,25 +20,13 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="header-profile-about">
                 <div class="card" style="margin-bottom: 40px;">
                     <div class="card-body">
                         <div class="birth-box">
-                            <span>Data urodzenia:</span>
+                            <span>Data urodzenia</span>
                             <span style="float: right;">{{ $userData->birth }}</span>
-                        </div>
-                        <div class="home-box">
-                            <span>Miejsce zamieszkania</span>
-
-                        </div>
-                        <div class="status-box">
-                            <span>Status</span>
-
-                        </div>
-                        <div class="interests-box">
-                            <span>Zainteresowania</span>
-
                         </div>
                     </div>
                 </div>
@@ -50,15 +47,10 @@
                             <ul>
                                 <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/setActive') }}" class="a-post-menu">Ustaw jako aktywny</a></li>
                                 <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/edit') }}" class="a-post-menu">Edytuj</a></li>
-                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/delete') }}" class="a-post-menu">Usuń</a></li>
+                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/delete') }}" class="a-post-menu" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
                             </ul>
                         </div>
                     </div>
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
                     <h5 class="card-title">
                         {{ $inactivePost->user->name }} {{ $inactivePost->user->surname }}
                     </h5>

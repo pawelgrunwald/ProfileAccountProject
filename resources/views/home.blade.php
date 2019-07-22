@@ -2,6 +2,15 @@
 
 @section('content')
 <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            @if (session('status'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+        </div>
+    </div>
     @if (Auth::user()->type == 0)
         <div class="row justify-content-center" style="margin-bottom: 50px;">
             <div class="col-md-8">
@@ -44,13 +53,13 @@
                         <div class="post-menu post-{{ $post->id }}">
                             <ul>
                                 <li><a href="{{ URL::to('/post/'.$post->id.'/edit') }}" class="a-post-menu">Edytuj</a></li>
-                                <li><a href="{{ URL::to('/post/'.$post->id.'/delete') }}" class="a-post-menu">Usuń</a></li>
+                                <li><a href="{{ URL::to('/post/'.$post->id.'/delete') }}" class="a-post-menu" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
                             </ul>
                         </div>
                     </div>
-                    @if (session('status'))
+                    @if (session('editPost'))
                         <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                            {{ session('editPost') }}
                         </div>
                     @endif
                     <h5 class="card-title">
