@@ -25,5 +25,7 @@ Route::post('/', 'PostController@storePost');
 
 Route::get('/profile/{userName}-{userSurname}', 'UserController@userTable');
 
+Route::get('/post/{post_id}/setActive', 'PostController@setActive');
+
 Auth::routes();
 

@@ -49,6 +49,8 @@
                         <div class="post-menu post-{{ $inactivePost->id }}">
                             <ul>
                                 <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/setActive') }}" class="a-post-menu">Ustaw jako aktywny</a></li>
+                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/edit') }}" class="a-post-menu">Edytuj</a></li>
+                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/delete') }}" class="a-post-menu">Usuń</a></li>
                             </ul>
                         </div>
                     </div>
