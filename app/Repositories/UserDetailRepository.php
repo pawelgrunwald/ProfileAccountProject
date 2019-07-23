@@ -25,4 +25,8 @@ Class UserDetailRepository extends BaseRepository {
 		return $data;
 	}
 
+	public function updateDetailData($user_id, $data) {
+		return $this->model->where('user_id', $user_id)->update($data);
+	}
+
 }

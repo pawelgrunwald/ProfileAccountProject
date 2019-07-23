@@ -21,13 +21,22 @@ Route::get('/', function () {
 
 Route::get('/home', 'PostController@index');
 
+
 Route::post('/', 'PostController@storePost');
 
+
 Route::get('/profile', 'UserController@userTable');
+
+
+Route::get('/edit', 'UserController@updateData');
+
+Route::post('/edit/birth', 'UserController@storeDetailData');
+
 
 Route::get('/post/{post_id}/setActive', 'PostController@setActive');
 
 Route::get('/post/{post_id}/delete', 'PostController@deletePost');
+
 
 Auth::routes();
 

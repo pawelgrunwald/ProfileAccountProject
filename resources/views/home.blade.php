@@ -46,17 +46,19 @@
             @foreach ($posts as $post)
             <div class="card" id="{{ $post->id }}" style="margin-bottom: 10px;">
                 <div class="card-body">
-                    <div class="card-n">
-                        <div class="post-menu-more">
-                            <h5 class="post-menu-more-btn" data-id="{{ $post->id }}">...</h5>
+                    @if ($post->user->id == Auth::user()->id)
+                        <div class="card-n">
+                            <div class="post-menu-more">
+                                <h5 class="post-menu-more-btn" data-id="{{ $post->id }}">...</h5>
+                            </div>
+                            <div class="post-menu post-{{ $post->id }}">
+                                <ul>
+                                    <li><a href="{{ URL::to('/post/'.$post->id.'/edit') }}" class="a-post-menu">Edytuj</a></li>
+                                    <li><a href="{{ URL::to('/post/'.$post->id.'/delete') }}" class="a-post-menu" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div class="post-menu post-{{ $post->id }}">
-                            <ul>
-                                <li><a href="{{ URL::to('/post/'.$post->id.'/edit') }}" class="a-post-menu">Edytuj</a></li>
-                                <li><a href="{{ URL::to('/post/'.$post->id.'/delete') }}" class="a-post-menu" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endif
                     @if (session('editPost'))
                         <div class="alert alert-success" role="alert">
                             {{ session('editPost') }}

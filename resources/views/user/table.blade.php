@@ -14,19 +14,24 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="header-profile-section">
-
                 <h4>{{ Auth::user()->name.' '.Auth::user()->surname }}</h4>
             </div>
         </div>
     </div>
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="header-profile-about">
                 <div class="card" style="margin-bottom: 40px;">
                     <div class="card-body">
-                        <div class="birth-box">
+                        <div class="box">
                             <span>Data urodzenia</span>
+                            <span style="float: right;">&nbsp;|&nbsp;<a href="{{ action('UserController@updateData', ['type' => 'birth']) }}">Edytuj</a></span>
                             <span style="float: right;">{{ $userData->birth }}</span>
+                        </div>
+                        <div class="box">
+                            <span>Miasto</span>
+                            <span style="float: right;">&nbsp;|&nbsp;<a href="{{ action('UserController@updateData', ['type' => 'city']) }}">Edytuj</a></span>
+                            <span style="float: right;">{{ $userData->city }}</span>
                         </div>
                     </div>
                 </div>
