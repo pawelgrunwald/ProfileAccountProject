@@ -39,4 +39,3 @@ Route::get('/post/{post_id}/delete', 'PostController@deletePost');
 
 
 Auth::routes();
-
