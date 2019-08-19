@@ -4,22 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 
-use App\Models\Post;
 use App\Models\User;
-use App\Models\UserDetail;
-
 use App\Repositories\PostRepository;
-use App\Repositories\UserRepository;
 use App\Repositories\UserDetailRepository;
 
 class UserController extends Controller
 {
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth');
     }
 
-    public function userTable(PostRepository $postRepository, UserDetailRepository $userDetailRepository) {
+    public function userTable(PostRepository $postRepository, UserDetailRepository $userDetailRepository)
+    {
         if (Auth::user()->type == 1) {
             return redirect()->route('start');
         }
@@ -31,24 +30,19 @@ class UserController extends Controller
                                     'userData' => $userData]);
     }
 
-    public function updateData(UserDetailRepository $userDetailRepository) {
+    public function updateData(UserDetailRepository $userDetailRepository)
+    {
         if (Auth::user()->type == 1) {
             return redirect()->route('start');
         }
 
-        switch($_GET['type']) {
-            case 'birth':
-                $form = ['type' => 'date', 'inputName' => 'birth', 'name' => 'Data urodzenia'];
-            break;
-            case 'city':
-                $form = ['type' => 'text', 'inputName' => 'city', 'name' => 'Miasto'];
-            break;
-        }
+        $userData = $userDetailRepository->getDataUser(Auth::user()->id);
 
-        return view('user.editData', ['form' => $form]);
+        return view('user.editData', ['userData' => $userData]);
     }
 
-    public function storeDetailData(Request $request, UserDetailRepository $userDetailRepository) {
+    public function storeDetailData(Request $request, UserDetailRepository $userDetailRepository)
+    {
         if (Auth::user()->type == 1) {
             return redirect()->route('start');
         }
@@ -57,14 +51,27 @@ class UserController extends Controller
                 'city' => 'max:100'
         ]);
 
+        $userData = $userDetailRepository->getDataUser(Auth::user()->id);
+
         $data = [];
-        if ($request->has('birth')) {
-            $data = ['birth' => $request->input('birth')];
-        } else if ($request->has('city')) {
-            $data = ['city' => $request->input('city')];
+
+        if ($request->input('birth') != $userData->birth) {
+            Arr::set($data, 'birth', $request->input('birth'));
+            Arr::set($nameData, 'Data urodzenia');
+        }
+
+        if ($request->input('city') != $userData->city) {
+            Arr::set($data, 'city', $request->input('city'));
+        }
+
+        if (empty($data)) {
+            $message = 'Brak zmian w danych użytkownika';
+        } else {
+            $message = 'Dane zostały poprawnie zmienione';
         }
 
         $userDetailRepository->updateDetailData(Auth::user()->id, $data);
-        return redirect('/profile')->with('status', 'Dane zostały poprawnie zmienione');
+
+        return redirect('/profile')->with('status', $message);
     }
 }

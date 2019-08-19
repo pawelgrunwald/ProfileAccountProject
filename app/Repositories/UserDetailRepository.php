@@ -8,25 +8,27 @@ use App\Models\Post;
 
 use DB;
 
-Class UserDetailRepository extends BaseRepository {
+class UserDetailRepository extends BaseRepository
+{
+    public function __construct(UserDetail $model)
+    {
+        $this->model = $model;
+    }
 
-	public function __construct(UserDetail $model) {
-		$this->model = $model;
-	}
+    public function getDataUser($user_id)
+    {
+        $data = $this->model->where('user_id', $user_id)->first();
 
-	public function getDataUser($user_id) {
-		$data = $this->model->where('user_id', $user_id)->first();
+        if ($data == '') {
+            $this->model->create(['user_id' => $user_id]);
+            $data = $this->model->where('user_id', $user_id)->first();
+        }
 
-		if ($data == '') {
-			$this->model->create(['user_id' => $user_id]);
-			$data = $this->model->where('user_id', $user_id)->first();
-		}
+        return $data;
+    }
 
-		return $data;
-	}
-
-	public function updateDetailData($user_id, $data) {
-		return $this->model->where('user_id', $user_id)->update($data);
-	}
-
+    public function updateDetailData($user_id, $data)
+    {
+        return $this->model->where('user_id', $user_id)->update($data);
+    }
 }

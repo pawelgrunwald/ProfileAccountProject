@@ -30,7 +30,7 @@ Route::get('/profile', 'UserController@userTable');
 
 Route::get('/edit', 'UserController@updateData');
 
-Route::post('/edit/birth', 'UserController@storeDetailData');
+Route::post('/edit', 'UserController@storeDetailData');
 
 
 Route::get('/post/{post_id}/setActive', 'PostController@setActive');

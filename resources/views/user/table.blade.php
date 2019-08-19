@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             @if (session('status'))
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success text-center" role="alert">
                     {{ session('status') }}
                 </div>
             @endif
@@ -13,26 +13,25 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="header-profile-section">
+            <div class="header-profile-section ">
                 <h4>{{ Auth::user()->name.' '.Auth::user()->surname }}</h4>
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-4 offset-md-2">
             <div class="header-profile-about">
                 <div class="card" style="margin-bottom: 40px;">
                     <div class="card-body">
                         <div class="box">
                             <span>Data urodzenia</span>
-                            <span style="float: right;">&nbsp;|&nbsp;<a href="{{ action('UserController@updateData', ['type' => 'birth']) }}">Edytuj</a></span>
                             <span style="float: right;">{{ $userData->birth }}</span>
                         </div>
                         <div class="box">
                             <span>Miasto</span>
-                            <span style="float: right;">&nbsp;|&nbsp;<a href="{{ action('UserController@updateData', ['type' => 'city']) }}">Edytuj</a></span>
                             <span style="float: right;">{{ $userData->city }}</span>
                         </div>
+                        <a href="{{ action('UserController@updateData') }}" class="card-link">Edytuj</a>
                     </div>
                 </div>
             </div>
@@ -50,9 +49,9 @@
                         </div>
                         <div class="post-menu post-{{ $inactivePost->id }}">
                             <ul>
-                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/setActive') }}" class="a-post-menu">Ustaw jako aktywny</a></li>
-                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/edit') }}" class="a-post-menu">Edytuj</a></li>
-                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/delete') }}" class="a-post-menu" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
+                                <li><button type="button" class="btn btn-success"><a href="{{ URL::to('/post/'.$inactivePost->id.'/setActive') }}" class="a-post-menu">Ustaw jako aktywny</a></button></li>
+                                <li><button type="button" class="btn btn-warning"><a href="{{ URL::to('/post/'.$inactivePost->id.'/edit') }}" class="a-post-menu">Edytuj</a></button></li>
+                                <li><button type="button" class="btn btn-danger"><a href="{{ URL::to('/post/'.$inactivePost->id.'/delete') }}" class="a-post-menu" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></button></li>
                             </ul>
                         </div>
                     </div>

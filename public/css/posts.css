@@ -16,5 +16,6 @@
     display: inline;
 }
 .post-menu ul li a {
-    color: brown;
+    color: #FFFFFF;
+    font-size: 15px;
 }
