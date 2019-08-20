@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             @if (session('status'))
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success text-center" role="alert">
                     {{ session('status') }}
                 </div>
             @endif
@@ -18,21 +18,20 @@
             </div>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="row">
+        <div class="col-md-4 offset-md-2">
             <div class="header-profile-about">
                 <div class="card" style="margin-bottom: 40px;">
                     <div class="card-body">
                         <div class="box">
                             <span>Data urodzenia</span>
-                            <span style="float: right;">&nbsp;|&nbsp;<a href="{{ action('UserController@updateData', ['type' => 'birth']) }}">Edytuj</a></span>
                             <span style="float: right;">{{ $userData->birth }}</span>
                         </div>
                         <div class="box">
                             <span>Miasto</span>
-                            <span style="float: right;">&nbsp;|&nbsp;<a href="{{ action('UserController@updateData', ['type' => 'city']) }}">Edytuj</a></span>
                             <span style="float: right;">{{ $userData->city }}</span>
                         </div>
+                        <a href="{{ action('UserController@updateData') }}" class="card-link">Edytuj</a>
                     </div>
                 </div>
             </div>

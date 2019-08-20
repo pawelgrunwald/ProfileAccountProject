@@ -53,8 +53,8 @@
                             </div>
                             <div class="post-menu post-{{ $post->id }}">
                                 <ul>
-                                    <li><a href="{{ URL::to('/post/'.$post->id.'/edit') }}" class="a-post-menu">Edytuj</a></li>
-                                    <li><a href="{{ URL::to('/post/'.$post->id.'/delete') }}" class="a-post-menu" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
+                                    <li><a href="{{ URL::to('/post/'.$post->id.'/edit') }}" class="a-post-menu btn btn-danger">Edytuj</a></li>
+                                    <li><a href="{{ URL::to('/post/'.$post->id.'/delete') }}" class="a-post-menu btn btn-warning" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
                                 </ul>
                             </div>
                         </div>

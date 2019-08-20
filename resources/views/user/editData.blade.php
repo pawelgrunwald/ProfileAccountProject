@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        @if (isset($form))
+        @if (isset($userData))
             <div class="col-md-6">
                 <div class="header-profile-about">
                     <div class="card" style="margin-bottom: 40px;">
@@ -23,8 +23,12 @@
                                 <form action="{{ action('UserController@storeDetailData') }}"  method="POST" role="form">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                     <div class="form-group">
-                                        <label for="{{ $form['inputName'] }}">{{ $form['name'] }}: </label>
-                                        <input type="{{ $form['type'] }}" name="{{ $form['inputName'] }}" id="{{ $form['inputName'] }}" style="float: right;">
+                                        <label for="birth">Data urodzenia: </label>
+                                        <input type="date" name="birth" id="birth" style="float: right;" value="{{ $userData->birth }}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="city">Data urodzenia: </label>
+                                        <input type="text" name="city" id="city" style="float: right;" value="{{ $userData->city }}">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Aktualizuj</button>
                                 </form>
