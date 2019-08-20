@@ -23,11 +23,11 @@
                                 <form action="{{ action('UserController@storeDetailData') }}"  method="POST" role="form">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                     <div class="form-group">
-                                        <label for="birth">Date of birth: </label>
+                                        <label for="birth">Data urodzenia: </label>
                                         <input type="date" name="birth" id="birth" style="float: right;" value="{{ $userData->birth }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="city">City: </label>
+                                        <label for="city">Miasto: </label>
                                         <input type="text" name="city" id="city" style="float: right;" value="{{ $userData->city }}">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Aktualizuj</button>

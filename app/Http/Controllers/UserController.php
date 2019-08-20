@@ -54,10 +54,9 @@ class UserController extends Controller
         $userData = $userDetailRepository->getDataUser(Auth::user()->id);
 
         $data = [];
-
+        
         if ($request->input('birth') != $userData->birth) {
             Arr::set($data, 'birth', $request->input('birth'));
-            Arr::set($nameData, 'Data urodzenia');
         }
 
         if ($request->input('city') != $userData->city) {
