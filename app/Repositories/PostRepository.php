@@ -24,8 +24,9 @@ class PostRepository extends BaseRepository
         return $this->model->where('user_id', $user_id)->where('shared', '0')->orderBy('created_at', 'desc')->get();
     }
 
-    public function checkUserOfPost($post_id)
+    public function dataPost($post_id)
     {
         return $this->model->find($post_id);
     }
+
 }

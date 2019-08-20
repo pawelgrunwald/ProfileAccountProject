@@ -35,6 +35,10 @@ Route::post('/edit', 'UserController@storeDetailData');
 
 Route::get('/post/{post_id}/setActive', 'PostController@setActive');
 
+Route::get('/post/{post_id}/edit', 'PostController@updatePost');
+
+Route::post('/post/edit', 'PostController@storePostData');
+
 Route::get('/post/{post_id}/delete', 'PostController@deletePost');
 
 

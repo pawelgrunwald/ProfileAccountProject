@@ -49,9 +49,9 @@
                         </div>
                         <div class="post-menu post-{{ $inactivePost->id }}">
                             <ul>
-                                <li><button type="button" class="btn btn-success"><a href="{{ URL::to('/post/'.$inactivePost->id.'/setActive') }}" class="a-post-menu">Ustaw jako aktywny</a></button></li>
-                                <li><button type="button" class="btn btn-warning"><a href="{{ URL::to('/post/'.$inactivePost->id.'/edit') }}" class="a-post-menu">Edytuj</a></button></li>
-                                <li><button type="button" class="btn btn-danger"><a href="{{ URL::to('/post/'.$inactivePost->id.'/delete') }}" class="a-post-menu" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></button></li>
+                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/setActive') }}" class="a-post-menu btn btn-success">Ustaw jako aktywny</a></li>
+                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/edit') }}" class="a-post-menu btn btn-warning">Edytuj</a></li>
+                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/delete') }}" class="a-post-menu btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
                             </ul>
                         </div>
                     </div>
