@@ -14,21 +14,16 @@
         </div>
     </div>
     <div class="row justify-content-center">
-        @if (isset($userData))
             <div class="col-md-6">
                 <div class="header-profile-about">
                     <div class="card" style="margin-bottom: 40px;">
                         <div class="card-body">
                             <div class="box">
-                                <form action="{{ action('UserController@storeDetailData') }}"  method="POST" role="form" enctype="multipart/form-data">
+                                <form action="{{ action('UserController@storeProfileImage') }}"  method="POST" role="form" enctype="multipart/form-data">
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                     <div class="form-group">
-                                        <label for="birth">Data urodzenia: </label>
-                                        <input type="date" name="birth" id="birth" style="float: right;" value="{{ $userData->birth }}">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="city">Miasto: </label>
-                                        <input type="text" name="city" id="city" style="float: right;" value="{{ $userData->city }}">
+                                        <label for="profileImage">Zdjęcie profilowe</label>
+                                        <input type="file" name="profileImage" id="profileImage" class="form-control-file" >
                                     </div>
                                     <button type="submit" class="btn btn-primary">Aktualizuj</button>
                                 </form>
@@ -37,7 +32,6 @@
                     </div>
                 </div>
             </div>
-        @endif
     </div>
 </div>
 @endsection('content')

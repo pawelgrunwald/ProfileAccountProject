@@ -32,6 +32,11 @@ Route::get('/edit', 'UserController@updateData');
 
 Route::post('/edit', 'UserController@storeDetailData');
 
+Route::get('/edit/profileImage' , 'UserController@updateProfileImage');
+
+Route::post('/edit/profilePicture', 'UserController@storeProfileImage');
+
+
 
 Route::get('/post/{post_id}/setActive', 'PostController@setActive');
 

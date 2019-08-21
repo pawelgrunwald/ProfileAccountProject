@@ -65,7 +65,11 @@
                         </div>
                     @endif
                     <h5 class="card-title">
-                    <a href="{{ URL::to('/'.$post->user->id.'/'.$post->user->name.'-'.$post->user->surname) }}">{{ $post->user->name }} {{ $post->user->surname }}</a>
+                    @if ($post->user->id != Auth::user()->id)
+                        <a href="{{ URL::to('/'.$post->user->id.'/'.$post->user->name.'-'.$post->user->surname) }}">{{ $post->user->name }} {{ $post->user->surname }}</a>
+                    @else
+                    <a href="{{  URL::to('profile/') }}">{{ $post->user->name }} {{ $post->user->surname }}</a>
+                    @endif
                     </h5>
                     <p class="card-text">
                         {{ $post->content }}

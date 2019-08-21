@@ -30,8 +30,13 @@
                                     <div class="form-group">
                                         <label for="share">Udostępnić teraz ?</label>
                                         <select name="sharing" class="form-control col-md-2" id="share">
-                                            <option value="1">Tak</option>
-                                            <option value="0">Nie</option>
+                                            @if ($dataPost->shared == 1)
+                                                <option value="1" selected>Tak</option>
+                                                <option value="0">Nie</option>
+                                            @else
+                                                <option value="1">Tak</option>
+                                                <option value="0" selected>Nie</option>
+                                            @endif
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Aktualizuj</button>

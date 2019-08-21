@@ -20,7 +20,7 @@ class UserDetailRepository extends BaseRepository
         $data = $this->model->where('user_id', $user_id)->first();
 
         if ($data == '') {
-            $this->model->create(['user_id' => $user_id]);
+            $this->model->create(['user_id' => $user_id,'image_user' => 'default.png']);
             $data = $this->model->where('user_id', $user_id)->first();
         }
 

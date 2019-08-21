@@ -10,6 +10,8 @@ use App\Models\User;
 use App\Repositories\PostRepository;
 use App\Repositories\UserDetailRepository;
 
+use Image;
+
 class UserController extends Controller
 {
     public function __construct()
@@ -48,7 +50,8 @@ class UserController extends Controller
         }
         $request->validate([
                 'birth' => 'date|before:'.date('Y-m-d'),
-                'city' => 'max:100'
+                'city' => 'max:100',
+                'profileImage' => 'file|image|max:3072'
         ]);
 
         $userData = $userDetailRepository->getDataUser(Auth::user()->id);
@@ -63,11 +66,45 @@ class UserController extends Controller
             Arr::set($data, 'city', $request->input('city'));
         }
 
-        if (empty($data)) {
-            $message = 'Brak zmian w danych użytkownika';
-        } else {
-            $message = 'Dane zostały poprawnie zmienione';
+        $message = (empty($data)) ? 'Brak zmian w danych użytkownika' : 'Dane zostały poprawnie zmienione';
+
+        $userDetailRepository->updateDetailData(Auth::user()->id, $data);
+
+        return redirect('/profile')->with('status', $message);
+    }
+
+    public function updateProfileImage()
+    {
+        if (Auth::user()->type == 1) {
+            return redirect()->route('start');
         }
+
+        return view('user.editProfileImage');
+    }
+
+    public function storeProfileImage(Request $request, UserDetailRepository $userDetailRepository)
+    {
+        if (Auth::user()->type == 1) {
+            return redirect()->route('start');
+        }
+        $request->validate([
+                'profileImage' => 'file|image|mimes:jpg,png,jpeg|max:4096'
+        ]);
+
+        $data = [];
+        
+        if ($request->hasFile('profileImage')) {
+            $image = $request->file('profileImage');
+            $filename =  strtolower(Auth::user()->surname) . time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('uploads/profileImages/' . $filename);
+            $img = Image::make($image)->save($location);
+
+            Arr::set($data, 'image_user', $filename);
+        }
+        $message = (empty($data)) ? 'Zdjęcie profilowe nie zostało zmienione': 'Zdjęcie profilowe zostało zmienione';
+        
+        $userData = $userDetailRepository->getDataUser(Auth::user()->id);
+        unlink(public_path('uploads/profileImages/'.$userData->image_user));
 
         $userDetailRepository->updateDetailData(Auth::user()->id, $data);
 

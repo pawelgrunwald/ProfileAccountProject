@@ -14,6 +14,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="header-profile-section ">
+                <div class="img-box" style="background-image: url( {{ asset('uploads/profileImages/'.$userData->image_user ) }} ); float: left">
+                </div>
+                <a href="{{ action('UserController@updateProfileImage') }}">Zmień zdjęcie</a>
                 <h4>{{ Auth::user()->name.' '.Auth::user()->surname }}</h4>
             </div>
         </div>
