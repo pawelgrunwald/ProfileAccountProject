@@ -35,6 +35,13 @@
                             <span style="float: right;">{{ $userData->city }}</span>
                         </div>
                         <a href="{{ action('UserController@updateData') }}" class="card-link">Edytuj</a>
+                        <div class="messages">
+                            @if (!empty($messages))
+                                @foreach ($messages as $message)
+                                    <p>{!! $message !!}</p>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,31 +49,50 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <h5>Nieaktywne posty</h5>
-            @foreach ($inactivePosts as $inactivePost)
-            <div class="card" id="{{ $inactivePost->id }}" style="margin-bottom: 10px;">
-                <div class="card-body">
-                    <div class="card-n">
-                        <div class="post-menu-more">
-                            <h5 class="post-menu-more-btn" data-id="{{ $inactivePost->id }}">...</h5>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inactivePosts">
+                Nieaktywne posty
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade bd-example-modal-lg" id="inactivePosts" tabindex="-1" role="dialog" aria-labelledby="inactivePostsLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="inactivePostsLabel">Nieaktywne posty</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @foreach ($inactivePosts as $inactivePost)
+                        <div class="card" id="{{ $inactivePost->id }}" style="margin-bottom: 10px;">
+                            <div class="card-body">
+                                <div class="card-n">
+                                    <div class="post-menu-more">
+                                        <h5 class="post-menu-more-btn" data-id="{{ $inactivePost->id }}">...</h5>
+                                    </div>
+                                    <div class="post-menu post-{{ $inactivePost->id }}">
+                                        <ul>
+                                            <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/set-active') }}" class="a-post-menu btn btn-success">Ustaw jako aktywny</a></li>
+                                            <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/edit') }}" class="a-post-menu btn btn-warning">Edytuj</a></li>
+                                            <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/delete') }}" class="a-post-menu btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <h5 class="card-title">
+                                    {{ $inactivePost->user->name }} {{ $inactivePost->user->surname }}
+                                </h5>
+                                <p class="card-text">
+                                    {{ $inactivePost->content }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="post-menu post-{{ $inactivePost->id }}">
-                            <ul>
-                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/setActive') }}" class="a-post-menu btn btn-success">Ustaw jako aktywny</a></li>
-                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/edit') }}" class="a-post-menu btn btn-warning">Edytuj</a></li>
-                                <li><a href="{{ URL::to('/post/'.$inactivePost->id.'/delete') }}" class="a-post-menu btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć Post ?')">Usuń</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <h5 class="card-title">
-                        {{ $inactivePost->user->name }} {{ $inactivePost->user->surname }}
-                    </h5>
-                    <p class="card-text">
-                        {{ $inactivePost->content }}
-                    </p>
+                    @endforeach
                 </div>
             </div>
-            @endforeach
         </div>
     </div>
 

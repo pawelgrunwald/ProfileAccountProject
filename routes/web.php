@@ -32,13 +32,13 @@ Route::get('/edit', 'UserController@updateData');
 
 Route::post('/edit', 'UserController@storeDetailData');
 
-Route::get('/edit/profileImage' , 'UserController@updateProfileImage');
+Route::get('/edit/profile-picture', 'UserController@updateProfileImage');
 
-Route::post('/edit/profilePicture', 'UserController@storeProfileImage');
+Route::post('/edit/profile-picture', 'UserController@storeProfileImage');
 
 
 
-Route::get('/post/{post_id}/setActive', 'PostController@setActive');
+Route::get('/post/{post_id}/set-active', 'PostController@setActive');
 
 Route::get('/post/{post_id}/edit', 'PostController@updatePost');
 

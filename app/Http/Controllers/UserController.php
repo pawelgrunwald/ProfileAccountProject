@@ -27,9 +27,16 @@ class UserController extends Controller
         $inactivePosts = $postRepository->inactivePostsUser(Auth::user()->id);
 
         $userData = $userDetailRepository->getDataUser(Auth::user()->id);
+
+        $messages = [];
+
+        if ($userData->birth == date('Y-m-d')) {
+            Arr::set($messages, 'birthMessage', 'Dzisiaj masz urodziny ! <br> Wszystkiego Najlepszego '. Auth::user()->name);
+        }
         
         return view('user.table', ['inactivePosts' => $inactivePosts,
-                                    'userData' => $userData]);
+                                    'userData' => $userData,
+                                    'messages' => $messages]);
     }
 
     public function updateData(UserDetailRepository $userDetailRepository)
