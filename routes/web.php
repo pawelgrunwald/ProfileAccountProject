@@ -37,6 +37,19 @@ Route::get('/edit/profile-picture', 'UserController@updateProfileImage');
 Route::post('/edit/profile-picture', 'UserController@storeProfileImage');
 
 
+Route::get('/add-album', 'UserPhotoController@addAlbum');
+
+Route::post('/add-album', 'UserPhotoController@storeAlbum');
+
+Route::get('/delete-album/{id}', 'UserPhotoController@deleteAlbum');
+
+
+Route::get('/add-photo', 'UserPhotoController@addPhoto');
+
+Route::post('/add-photo', 'UserPhotoController@storePhotos');
+
+Route::get('/delete-photo/{id}', 'UserPhotoController@deletePhoto');
+
 
 Route::get('/post/{post_id}/set-active', 'PostController@setActive');
 

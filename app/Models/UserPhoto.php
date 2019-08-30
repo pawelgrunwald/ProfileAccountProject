@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 use DB;
 use App\Models\User;
+use App\Models\PhotoAlbum;
 
-class Post extends Model
+class UserPhoto extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -15,11 +16,13 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'content', 'shared'
+        'photo_album_id', 'path'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    // public $timestamps = false;
 }

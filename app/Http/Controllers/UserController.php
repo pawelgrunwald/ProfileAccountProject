@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use App\Models\User;
 use App\Repositories\PostRepository;
 use App\Repositories\UserDetailRepository;
+use App\Repositories\PhotoAlbumRepository;
 
 use Image;
 
@@ -19,7 +20,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
-    public function userTable(PostRepository $postRepository, UserDetailRepository $userDetailRepository)
+    public function userTable(PostRepository $postRepository, UserDetailRepository $userDetailRepository, PhotoAlbumRepository $photoAlbumRepository)
     {
         if (Auth::user()->type == 1) {
             return redirect()->route('start');
@@ -33,10 +34,13 @@ class UserController extends Controller
         if ($userData->birth == date('Y-m-d')) {
             Arr::set($messages, 'birthMessage', 'Dzisiaj masz urodziny ! <br> Wszystkiego Najlepszego '. Auth::user()->name);
         }
+
+        $photoAlbum = $photoAlbumRepository->photoAlbum(Auth::user()->id);
         
         return view('user.table', ['inactivePosts' => $inactivePosts,
                                     'userData' => $userData,
-                                    'messages' => $messages]);
+                                    'messages' => $messages,
+                                    'photoAlbum' => $photoAlbum]);
     }
 
     public function updateData(UserDetailRepository $userDetailRepository)

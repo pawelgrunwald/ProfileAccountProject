@@ -55,6 +55,36 @@
             </button>
         </div>
     </div>
+    @if (!empty($photoAlbum))
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="add-photo" style="margin: 20px 0px;">
+                    <a href="{{ action('UserPhotoController@addAlbum') }}" class="btn btn-primary">Dodaj album</a>
+                    <a href="{{ action('UserPhotoController@addPhoto') }}" class="btn btn-primary">Dodaj zdjęcie/a</a>
+                </div>
+                @foreach ($photoAlbum as $album)
+                    <div class="card" style="margin-bottom: 40px;">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ $album->name }}</h4>
+                            <a href="{{ action('UserPhotoController@deleteAlbum', ['id' => $album->id]) }}" type="button" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć album ?')">Usuń</a>
+                            <div class="imagesAlbum">
+
+                            @foreach ($album->photos as $photo)
+                                <div class="image">
+                                    <div class="album-img" style="background-image: url( {{ asset($photo->path) }} ); float: left"></div>
+                                    <div class="img-delete"><a href="{{ action('UserPhotoController@deletePhoto', ['id' => $photo->id]) }}" onclick="return confirm('Czy na pewno chcesz usunąć zdjęcie ?')">usuń</a></div>
+                                </div>
+                            @endforeach
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                @endforeach
+            </div>
+        </div>
+    @endif
 
     <!-- Modal -->
     <div class="modal fade bd-example-modal-lg" id="inactivePosts" tabindex="-1" role="dialog" aria-labelledby="inactivePostsLabel" aria-hidden="true">
